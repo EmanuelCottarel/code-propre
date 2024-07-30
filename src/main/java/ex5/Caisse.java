@@ -7,6 +7,8 @@ public class Caisse {
 
 	private String nom;
 	private List<Item> items;
+	private double poidsItemMax;
+	private double poidsItemMin;
 
 	/** Constructeur
 	 * @param nom
@@ -15,6 +17,17 @@ public class Caisse {
 		super();
 		this.nom = nom;
 		this.items = new ArrayList<>();
+	}
+
+	public Caisse(String nom, double poidsItemMax, double poidsItemMin) {
+		this.nom = nom;
+		this.poidsItemMax = poidsItemMax;
+		this.poidsItemMin = poidsItemMin;
+	}
+
+	public boolean peutAccepter(Item item){
+		int poids = item.getPoids();
+		return poidsItemMin > item.getPoids() && item.getPoids() <= poidsItemMax;
 	}
 
 	/** Getter pour l'attribut nom
@@ -44,5 +57,26 @@ public class Caisse {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-	
+
+	public void addItem(Item item) {
+		if (this.peutAccepter(item)) {
+			items.add(item);
+		}
+	}
+
+	public double getPoidsItemMax() {
+		return poidsItemMax;
+	}
+
+	public void setPoidsItemMax(double poidsItemMax) {
+		this.poidsItemMax = poidsItemMax;
+	}
+
+	public double getPoidsItemMin() {
+		return poidsItemMin;
+	}
+
+	public void setPoidsItemMin(double poidsItemMin) {
+		this.poidsItemMin = poidsItemMin;
+	}
 }
